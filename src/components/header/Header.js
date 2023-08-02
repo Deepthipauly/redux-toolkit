@@ -8,7 +8,7 @@ const Header = () => {
 
 //totalCount n variable crete aka then reduce an evde use akunath so ath ela array l m poyit, data edth athnte total count
 // fetch cheya sahayikm.
-// cartlist=[{},{},{}, total] reduce array de ullil oro object kude poyt athnte total edthit plus cheythit tarum.
+// cartlist=[{},{},{}, total] reduce method array de ullil oro object l kude poyt athnte total edthit plus cheythit tarum.
 // reduce l 2 argument 1. accumulator, 2. value  then 0 -> type an kodukendath so 0 n start akm accumulator.
 
    const totalCartCount = cartList.reduce((acc, value) => (acc += value.count), 0);

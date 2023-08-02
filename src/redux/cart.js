@@ -17,25 +17,27 @@
 // action ind athl payload indavm namak individual data cartlist l store akanm, so eth product ano update akne aa data
 // cartlist l update knm the array ayond namk action push cheya patum.
 //namak count kude cartlist l venam so count kude add aknm.
-//nammal increment l check cheyum productId indo n, 
+//nammal increment l check cheyum productId indo n,
 //createAsyncThunk - thunk use akunath redux n aryilla asynchronous call handle akan ,
 // asynchronous aytan oru data update ava enath redux n manasilavila so ath updat akan anu thunk use akanath.
-// oru variable ezhuth fetchUser the thunk equate aka athl 2 arguments varum. type arikm, ath namade name koduka then 
+// oru variable ezhuth fetchUser the thunk equate aka athl 2 arguments varum. type arikm, ath namade name koduka then
 // namde variable fetchUser, pine oru function anu aa function l an namma code ezhutha.
 
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchUser= createAsyncThunk('cart/fetchUser', async(id)=>{
- const response =await axios.get(`https://jsonplaceholder.typicode.com/todos/1${id}`)
- console.log("Api",response.data);
- return response.data
-})
+export const fetchUser = createAsyncThunk("cart/fetchUser", async (id) => {
+  const response = await axios.get(
+    `https://jsonplaceholder.typicode.com/todos/1${id}`
+  );
+  console.log("Api", response.data);
+  return response.data;
+});
 
 const INITIAL_STATE = {
   cartList: [],
   cartCount: 0,
-  userDetail:[]
+  userDetail: [],
 };
 
 const cartSlice = createSlice({
@@ -43,56 +45,53 @@ const cartSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     addtoCart: (state, action) => {
-      const itemExist = state.cartList.find((item) => item.id === action.payload.id);
-         if (itemExist) {
-            state.cartList.forEach((item) => {
-               if (item?.id === action.payload.id) {
-                  item.count = 1;
-               }
-            });
-            return;
-         }
-         state.cartList.push({
-            ...action.payload,
-            count: 1,
-         });
-    
+      const itemExist = state.cartList.find(
+        (item) => item.id === action.payload.id
+      );
+      if (itemExist) {
+        state.cartList.forEach((item) => {
+          if (item?.id === action.payload.id) {
+            item.count = 1;
+          }
+        });
+        return;
+      }
+      state.cartList.push({
+        ...action.payload,
+        count: 1,
+      });
     },
-    increment: (state,action) => {
-      const productId=action.payload
-      state.cartList.forEach((item)=>{
-        if(item?.id===productId){
-          item.count++
+    increment: (state, action) => {
+      const productId = action.payload;
+      state.cartList.forEach((item) => {
+        if (item?.id === productId) {
+          item.count++;
         }
-      })
+      });
     },
-    decrement: (state,action) => {
-      const productId=action.payload
-      state.cartList.forEach((item)=>{
-        if(item?.id===productId){
-          item.count--
+    decrement: (state, action) => {
+      const productId = action.payload;
+      state.cartList.forEach((item) => {
+        if (item?.id === productId) {
+          item.count--;
         }
-      })
+      });
     },
   },
-  extraReducers:{
-    [fetchUser.pending]:(state,action)=>{
-      console.log('loading start');
-
+  extraReducers: {
+    [fetchUser.pending]: (state, action) => {
+      console.log("loading start");
     },
-    [fetchUser.fulfilled]:(state,action)=>{
-      console.log('success');
-      console.log('loading end');
-      state.userDetail.push(action.payload) 
-
+    [fetchUser.fulfilled]: (state, action) => {
+      console.log("success");
+      console.log("loading end");
+      state.userDetail.push(action.payload);
     },
-    [fetchUser.rejected]:(state,action)=>{
-      console.log('loading end');
-      console.log('error');
-
-    }
-
-  }
+    [fetchUser.rejected]: (state, action) => {
+      console.log("loading end");
+      console.log("error");
+    },
+  },
 });
 
 // ini react n ee method oke use akanm so namal ath export akanm, athn namma destructure akitan cheya,
