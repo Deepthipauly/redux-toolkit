@@ -1,12 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit"; //store n paranja file redux n import akm,ie configure store
+import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cart";
 
-export const store = configureStore({  // export aknm, so react can use it. 
+export const store = configureStore({
   reducer: {
-// we can create mulitiple reducers and only one store 
-    cart: cartReducer,            // name : reducer
+    cart: cartReducer,
   },
 });
-
-// ini ith react l kitan ath nammal provider lk inject aknm so ath cheyunath root l an cheyendath, athn, nammade App.js
-// l an cheyendath.
